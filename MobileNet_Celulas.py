@@ -24,12 +24,15 @@ mobilenet3 = modelos.mobilenet_v3_large(weights = True)
 modelo = mobilenet3
 #modelo = mobilenet3.features
 modelo.classifier[3] = nn.Linear(in_features=1280, out_features=5)#Numero de salidas 5: NILM, LSIL, HSIL, ASC y SCC
+
+'''
+Cabeza de  clasificador basado en trabajo de Ocampo et al.
 clasf = nn.Sequential(
     nn.AdaptiveAvgPool2d((1,1)),
     nn.Flatten(),
     nn.Linear(960,512),nn.LeakyReLU(),nn.Linear(512,128),nn.LeakyReLU(),nn.Linear(128,5), nn.LeakyReLU()
 )
-
+'''
 #modelo.classifier = clasf
 modelo = modelo.to(dispositivo)
 
